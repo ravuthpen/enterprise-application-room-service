@@ -1,0 +1,12 @@
+package com.piseth.java.school.roomservice;
+
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class RoomServiceApplicationTests {
+
+	//@Test
+	void contextLoads() {
+	}
+
+}
