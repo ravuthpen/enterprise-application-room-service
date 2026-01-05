@@ -2,6 +2,7 @@ package com.piseth.java.school.roomservice.util;
 
 import com.piseth.java.school.roomservice.dto.RoomFilterDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 
@@ -28,6 +29,25 @@ public class RoomCriteriaBuilder {
         if (Objects.nonNull(filter.getFloor())) {
             criterias.add(Criteria.where(FIELD_FLOOR).is(filter.getFloor()));
         }
+        // --- Start filter by Address
+        if(StringUtils.isNoneBlank(filter.getProvinceCode())){
+            criterias.add(Criteria.where("address.provinceCode").is(filter.getProvinceCode()));
+
+        }
+        if(StringUtils.isNoneBlank(filter.getDistrictCode())){
+            criterias.add(Criteria.where("address.districtCode").is(filter.getDistrictCode()));
+
+        }
+        if(StringUtils.isNoneBlank(filter.getCommuneCode())){
+            criterias.add(Criteria.where("address.communeCode").is(filter.getCommuneCode()));
+
+        }
+        if(StringUtils.isNoneBlank(filter.getVillageCode())){
+            criterias.add(Criteria.where("address.villageCode").is(filter.getVillageCode()));
+
+        }
+
+        // ------
 
         if (Objects.nonNull(filter.getRoomSizeMin()) || Objects.nonNull(filter.getRoomSizeMax())) {
             Criteria c = Criteria.where(FIELD_ROOM_SIZE);

@@ -17,7 +17,7 @@ public class PageDTO <T>{
     @Schema(description = "Number of recode per page")
     private int size;
     @Schema(description = "Total number of recode")
-    private long totalElement;
+    private long totalElements;
     @Schema(description = "Total number of page")
     private int totalPage;
     @Schema(description = "Current page data list")

@@ -1,14 +1,9 @@
-package com.piseth.java.school.roomservice.domain;
+package com.piseth.java.school.roomservice.message.event;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.CompoundIndexes;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,15 +13,8 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document("visitor_rooms")
-@CompoundIndexes({
-        @CompoundIndex(name = "idx_status_availableFrom", def = "{'status': 1, 'availableFrom': 1}"),
-        @CompoundIndex(name = "idx_addr_province_district", def = "{'address.provinceCode': 1, 'address.districtCode': 1}")
-})
-public class Room {
-
-    @Id
-    private String id; // same as Room aggregate id
+public class RoomFullPayload {
+    private String id;
     private String ownerId;
     private String name;
     private String description;
@@ -37,7 +25,7 @@ public class Room {
     private String roomType;
     private String propertyType;
 
-    private Address address;
+    private AddressPayload address;
 
     private Boolean hasFan;
     private Boolean hasAirConditioner;
@@ -80,8 +68,36 @@ public class Room {
 
     private Map<String, Object> extraAttributes;
 
-    @Indexed
-    private LocalDateTime lastEventAt;
-    private boolean deleted; // soft delete
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class AddressPayload {
+        private String provinceCode;
+        private String districtCode;
+        private String communeCode;
+        private String villageCode;
 
+        private String provinceName;
+        private String districtName;
+        private String communeName;
+        private String villageName;
+
+        private String line1;
+        private String line2;
+        private String postalCode;
+
+        private List<String> nearbyLandmarks;
+
+        @Data
+        @NoArgsConstructor
+        @AllArgsConstructor
+        @Builder
+        public static class GeoPayload {
+            private Double latitude;
+            private Double longitude;
+        }
+
+        private GeoPayload geo;
+    }
 }

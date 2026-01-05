@@ -1,6 +1,5 @@
 package com.piseth.java.school.roomservice.config;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -15,6 +14,7 @@ public class CorsConfig {
 
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedOrigin("http://localhost:4200");
+        config.addAllowedOrigin("http://localhost:4300");
 
         //url base
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

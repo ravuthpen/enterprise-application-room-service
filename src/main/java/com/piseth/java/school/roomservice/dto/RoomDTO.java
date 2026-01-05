@@ -1,5 +1,9 @@
 package com.piseth.java.school.roomservice.dto;
 
+import com.piseth.java.school.roomservice.domain.enumeration.GenderPreference;
+import com.piseth.java.school.roomservice.domain.enumeration.PropertyType;
+import com.piseth.java.school.roomservice.domain.enumeration.RoomStatus;
+import com.piseth.java.school.roomservice.domain.enumeration.RoomType;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -11,13 +15,20 @@ import java.util.Map;
 public class RoomDTO {
 
     private String id;
+    private String ownerId;
+
     private String name;
+    private String description;
 
-    private Double price;                  // price per month
+    private Double price;
+    private String currencyCode;
+
     private Integer floor;
-    private Double roomSize;              // square meters
+    private Double roomSize;
+    private RoomType roomType;
+    private PropertyType propertyType;
 
-    private LocationDTO location;
+    private AddressDTO address;
 
     private Boolean hasFan;
     private Boolean hasAirConditioner;
@@ -35,30 +46,28 @@ public class RoomDTO {
     private Boolean isPetFriendly;
     private Boolean isSmokingAllowed;
     private Boolean isSharedRoom;
-    private String genderPreference;
+    private GenderPreference genderPreference;
 
-    private String roomType;
-    private String propertyType;
-
-    private Double distanceToCenter;        // optional
-    private List<String> nearbyLandmarks;   // ["university", "mall"]
-
-    private Boolean isUtilityIncluded; //100
+    private Double distanceToCenter;
+    private Boolean isUtilityIncluded;
     private Boolean depositRequired;
+    private Double depositAmount;
     private Integer minStayMonths;
+    private String contactPhone;
 
-    private Boolean hasPhotos;
-    private Integer photoCount;
-    private Boolean hasVideoTour;
-
+    private List<String> photoUrls;
+    private String videoUrl;
     private Boolean verifiedListing;
 
+    private RoomStatus status;
     private LocalDateTime availableFrom;
     private LocalDateTime availableTo;
 
     private LocalDateTime createdAt;
-    private LocalDateTime lastUpdated;
+    private LocalDateTime updatedAt;
+    private String createdBy;
+    private String updatedBy;
 
-    private Map<String, Object> extraAttributes = new HashMap<>();
+    private Map<String, Object> extraAttributes;
 
 }

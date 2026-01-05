@@ -88,7 +88,7 @@ public class RoomController {
     public Mono<ResponseEntity<PageDTO<RoomDTO>>> getRoomByFilterPaginationWithHeader( @ModelAttribute RoomFilterDTO roomFilterDTO){
         return roomService.getRoomByFilterPagination(roomFilterDTO)
                 .map(page-> ResponseEntity.ok()
-                        .header("X-Total-Count", String.valueOf(page.getTotalElement()))
+                        .header("X-Total-Count", String.valueOf(page.getTotalElements()))
                         .body(page)
                 );
 
