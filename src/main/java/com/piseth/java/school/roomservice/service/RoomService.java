@@ -7,6 +7,8 @@ import com.piseth.java.school.roomservice.dto.RoomFilterDTO;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 
 public interface RoomService {
 	
@@ -19,5 +21,6 @@ public interface RoomService {
 	Flux<RoomDTO> searchRoomByName(String name);
 	Flux<RoomDTO> getRoomByFilter(RoomFilterDTO filterDTO); //will be deleted
 	Mono<PageDTO<RoomDTO>> getRoomByFilterPagination(RoomFilterDTO filterDTO);
+    Flux<RoomDTO> getRoomsByIds(List<String> ids);
 
 }

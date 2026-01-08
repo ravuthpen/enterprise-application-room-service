@@ -1,6 +1,12 @@
 package com.piseth.java.school.roomservice.service.impl;
 
+import java.util.List;
+
 import com.piseth.java.school.roomservice.domain.Room;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
+
 import com.piseth.java.school.roomservice.dto.PageDTO;
 import com.piseth.java.school.roomservice.dto.RoomDTO;
 import com.piseth.java.school.roomservice.dto.RoomFilterDTO;
@@ -10,15 +16,11 @@ import com.piseth.java.school.roomservice.repository.RoomCustomRepository;
 import com.piseth.java.school.roomservice.repository.RoomRepository;
 import com.piseth.java.school.roomservice.service.RoomService;
 import com.piseth.java.school.roomservice.util.RoomCriteriaBuilder;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -117,6 +119,16 @@ public class RoomServiceImpl implements RoomService{
 					return new PageDTO<>(filterDTO.getPage(),filterDTO.getSize(),total, totalPage, content);
 				});
 	}
+
+    @Override
+    public Flux<RoomDTO> getRoomsByIds(List<String> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return Flux.empty();
+        }
+
+        return roomRepository.findAllById(ids)
+                .map(roomMapper::toRoomDTO);
+    }
 
 
 }
